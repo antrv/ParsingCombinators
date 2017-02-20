@@ -52,8 +52,8 @@ namespace AR.Math.Expressions
                 select product;
 
             var sumOperator =
-                Parse.Char('+').Trim().Select(c => Operators.Multiply).Or(
-                    Parse.Char('-').Trim().Select(c => Operators.Divide));
+                Parse.Char('+').Trim().Select(c => Operators.Add).Or(
+                    Parse.Char('-').Trim().Select(c => Operators.Subtract));
 
             var sumExpression =
                 from product in productExpression.AtLeastOnce(sumOperator,

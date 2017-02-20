@@ -10,7 +10,7 @@ namespace Sample
     {
         static void Main(string[] args)
         {
-            const string expression = "a + b * 2.5 - a * b";
+            const string expression = "a + b * 5 / 2 - a * b * 5/7";
 
             Variable a = new Variable("a");
             Variable b = new Variable("b");
@@ -33,9 +33,18 @@ namespace Sample
 
                 Console.WriteLine("Perform substitution");
 
-                SubstituteTransformation substituteTransformation = new SubstituteTransformation(
-                    new ReadOnlyList<Variable>(a, b),
-                    new ReadOnlyList<Expression>(25.2, 11.1));
+                var variables = new ReadOnlyList<Variable>(a, b);
+                var values = new ReadOnlyList<Expression>(
+                    new Rational(252 / 10), // Rational is used because double represents 25.2 not accerately
+                    new Rational(111 / 10) // Rational is used because double is not accurately represents 11.1
+                    );
+
+                for (int i = 0; i < variables.Count; i++)
+                {
+                    Console.WriteLine(variables[i].Name + " = " + values[i]);
+                }
+
+                SubstituteTransformation substituteTransformation = new SubstituteTransformation(variables, values);
                 expr = substituteTransformation.Transform(expr);
                 Console.WriteLine(expr);
 
