@@ -35,8 +35,8 @@ namespace Sample
 
                 var variables = new ReadOnlyList<Variable>(a, b);
                 var values = new ReadOnlyList<Expression>(
-                    new Rational(252 / 10), // Rational is used because double represents 25.2 not accerately
-                    new Rational(111 / 10) // Rational is used because double is not accurately represents 11.1
+                    new Rational(252, 10), // Rational is used because double represents 25.2 not accerately
+                    new Rational(111, 10) // Rational is used because double is not accurately represents 11.1
                     );
 
                 for (int i = 0; i < variables.Count; i++)
