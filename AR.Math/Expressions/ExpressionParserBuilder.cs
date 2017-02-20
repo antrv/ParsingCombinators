@@ -18,9 +18,13 @@ namespace AR.Math.Expressions
                 from leftBracket in Parse.Char('(').Trim()
                 from parameters in Parse.Ref(() => _expressionParser).Many(Parse.Char(',').Trim())
                 from rightBracket in Parse.Char(')').Trim()
-                select new FunctionExpression(storage.Functions[name], parameters)).Catch("Function not found");
+                select new FunctionExpression(storage.Functions[name], parameters)).
+                Catch("Function not found");
 
-            var variableParser = Parse.Ident.Trim().Select(n => storage.Variables[n]).Catch("Variable not found");
+            var variableParser = Parse.Ident.
+                Trim().
+                Select(n => storage.Variables[n]).
+                Catch("Variable not found");
 
             var bracketExpressionParser =
                 from leftBracket in Parse.Char('(').Trim()
