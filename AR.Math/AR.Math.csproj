@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{16BC23EB-F37B-4D1A-8C1C-CEBEC4BA5C08}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AR.Math</RootNamespace>
+    <AssemblyName>AR.Math</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Expressions\AddOperator.cs" />
+    <Compile Include="ArrayHelper.cs" />
+    <Compile Include="Expressions\Constant.cs" />
+    <Compile Include="Expressions\Constants.cs" />
+    <Compile Include="Expressions\DivideOperator.cs" />
+    <Compile Include="Expressions\Expression.cs" />
+    <Compile Include="Expressions\ExpressionParserBuilder.cs" />
+    <Compile Include="Expressions\Extensions.cs" />
+    <Compile Include="Expressions\FDM\DiscretizationParameter.cs" />
+    <Compile Include="Expressions\FDM\DiscretizationScheme.cs" />
+    <Compile Include="Expressions\FDM\DiscretizationTransformation.cs" />
+    <Compile Include="Expressions\Function.cs" />
+    <Compile Include="Expressions\FunctionExpression.cs" />
+    <Compile Include="Expressions\FunctionList.cs" />
+    <Compile Include="Expressions\Functions.cs" />
+    <Compile Include="Expressions\MultiplyOperator.cs" />
+    <Compile Include="Expressions\NegateOperator.cs" />
+    <Compile Include="Expressions\Number.cs" />
+    <Compile Include="Expressions\Operator.cs" />
+    <Compile Include="Expressions\OperatorPriorities.cs" />
+    <Compile Include="Expressions\Operators.cs" />
+    <Compile Include="Expressions\OperatorType.cs" />
+    <Compile Include="Expressions\PlusOperator.cs" />
+    <Compile Include="Expressions\PowerOperator.cs" />
+    <Compile Include="Expressions\PredefinedFunction.cs" />
+    <Compile Include="Rational.cs" />
+    <Compile Include="Parsing\CollectionInput.cs" />
+    <Compile Include="Parsing\EnumerableInput.cs" />
+    <Compile Include="Parsing\FailParsingResult.cs" />
+    <Compile Include="Parsing\Helpers.cs" />
+    <Compile Include="Parsing\IParserInput.cs" />
+    <Compile Include="Parsing\IParsingResult.cs" />
+    <Compile Include="Parsing\Parse.cs" />
+    <Compile Include="Parsing\Parser.cs" />
+    <Compile Include="Parsing\ParsingError.cs" />
+    <Compile Include="Parsing\StringInput.cs" />
+    <Compile Include="Parsing\SuccessParsingResult.cs" />
+    <Compile Include="ReadOnlyList.cs" />
+    <Compile Include="ReadOnlyListExtensions.cs" />
+    <Compile Include="Expressions\Simplification\Addent.cs" />
+    <Compile Include="Expressions\Simplification\ProductAggregator.cs" />
+    <Compile Include="Expressions\Simplification\Sum.cs" />
+    <Compile Include="Expressions\Simplification\SumAggregator.cs" />
+    <Compile Include="Expressions\Storage.cs" />
+    <Compile Include="Expressions\SubtractOperator.cs" />
+    <Compile Include="Expressions\Transformations\ApproximateTransformation.cs" />
+    <Compile Include="Expressions\Transformations\DifferentiationTransformation.cs" />
+    <Compile Include="Expressions\Transformations\ExpressionTransformation.cs" />
+    <Compile Include="Expressions\Transformations\ExpressionVisitor.cs" />
+    <Compile Include="Expressions\Transformations\IExpressionTransformation.cs" />
+    <Compile Include="Expressions\Transformations\IExpressionVisitor.cs" />
+    <Compile Include="Expressions\Transformations\SimplificationTransformation.cs" />
+    <Compile Include="Expressions\Transformations\SubstituteTransformation.cs" />
+    <Compile Include="Expressions\Transformations\VariableListExtractor.cs" />
+    <Compile Include="Expressions\UserFunction.cs" />
+    <Compile Include="Expressions\Variable.cs" />
+    <Compile Include="Expressions\VariableList.cs" />
+    <Compile Include="Expressions\VectorExpression.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

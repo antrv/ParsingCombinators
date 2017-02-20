@@ -1,2 +1,2 @@
-# ParsingCombinators
-C# functional parsing combinators library
+# C# functional parsing combinators library
+
