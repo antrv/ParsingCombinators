@@ -7,8 +7,6 @@ namespace AR.Math.Expressions.Transformations
 {
     public sealed class SimplificationTransformation: ExpressionTransformation<Expression>
     {
-        public static readonly SimplificationTransformation Instance = new SimplificationTransformation();
-
         protected override Expression TransformNumber(Number number)
         {
             return number;

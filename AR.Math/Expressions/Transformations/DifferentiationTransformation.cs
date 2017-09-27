@@ -99,7 +99,10 @@ namespace AR.Math.Expressions.Transformations
 			UserFunction userFunction = functionExpression.Function as UserFunction;
 			if (userFunction != null)
 			{
-				SubstituteTransformation transformation = new SubstituteTransformation(userFunction.Arguments, functionExpression);
+                VariableValuePair[] values = userFunction.Arguments.
+                    Zip(functionExpression, (variable, value) => new VariableValuePair(variable, value)).
+                    ToArray();
+				SubstituteTransformation transformation = new SubstituteTransformation(values);
 				return Transform(transformation.Transform(userFunction.Expression));
 			}
 

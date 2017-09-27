@@ -26,7 +26,7 @@ namespace AR.Math
 
         public static IReadOnlyList<T> SetItem<T>(this IReadOnlyList<T> list, int index, T value)
         {
-             T[] items = new T[list.Count];
+            T[] items = new T[list.Count];
             list.CopyTo(items, 0);
             items[index] = value;
             return new ReadOnlyList<T>(items);

@@ -66,6 +66,7 @@
     <Compile Include="Expressions\PlusOperator.cs" />
     <Compile Include="Expressions\PowerOperator.cs" />
     <Compile Include="Expressions\PredefinedFunction.cs" />
+    <Compile Include="Expressions\VariableValuePair.cs" />
     <Compile Include="Rational.cs" />
     <Compile Include="Parsing\CollectionInput.cs" />
     <Compile Include="Parsing\EnumerableInput.cs" />

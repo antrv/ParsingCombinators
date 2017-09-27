@@ -18,7 +18,8 @@ namespace AR.Math.Expressions
 
 		public static Expression Simplify(this Expression expression)
 		{
-            return SimplificationTransformation.Instance.Transform(expression);
+            SimplificationTransformation transformation = new SimplificationTransformation();
+            return transformation.Transform(expression);
 		}
 	}
 }

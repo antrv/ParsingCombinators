@@ -8,49 +8,33 @@ namespace AR.Math.Expressions.Transformations
 	{
 		private readonly Dictionary<Variable, Expression> _variables;
 
-		public SubstituteTransformation(IReadOnlyList<Variable> variables, IReadOnlyList<Expression> expressions)
-		{
-			if (variables == null)
-				throw new ArgumentNullException(nameof(variables));
-			if (expressions == null)
-				throw new ArgumentNullException(nameof(expressions));
-			if (variables.Count == 0)
-				throw new ArgumentException("Variable list is empty.", nameof(variables));
-			if (expressions.Count == 0)
-				throw new ArgumentException("Expression list is empty.", nameof(expressions));
-			if (variables.Any(x => x == null))
-				throw new ArgumentException("Variable list contains nulls.", nameof(variables));
-			if (expressions.Any(x => x == null))
-				throw new ArgumentException("Expression list contains nulls.", nameof(expressions));
-			if (variables.Count != expressions.Count)
-				throw new ArgumentException("Expression list length must be equal to variables array length.", nameof(expressions));
+        public SubstituteTransformation(params VariableValuePair[] values)
+            : this((IReadOnlyList<VariableValuePair>)values)
+        {
+        }
 
-			_variables = new Dictionary<Variable, Expression>();
-			for (int i = 0, count = variables.Count; i < count; i++)
-				_variables.Add(variables[i], expressions[i]);
+        public SubstituteTransformation(IReadOnlyList<VariableValuePair> values)
+        {
+            if (values == null)
+				throw new ArgumentNullException(nameof(values));
+			if (values.Count == 0)
+				throw new ArgumentException("Variable list cannot be empty", nameof(values));
+			if (values.Any(x => x.Variable == null || x.Value == null))
+				throw new ArgumentException("Variable list contains nulls", nameof(values));
+
+			_variables = values.ToDictionary(p => p.Variable, p => p.Value);
 		}
 
-		protected override Expression TransformNumber(Number number)
+        protected override Expression TransformNumber(Number number) => number;
+        protected override Expression TransformConstant(Constant constant) => constant;
+
+        protected override Expression TransformVariable(Variable variable)
 		{
-			return number;
+            if (_variables.TryGetValue(variable, out Expression expression))
+                return expression;
+            return variable;
 		}
 
-	    protected override Expression TransformConstant(Constant constant)
-	    {
-	        return constant;
-	    }
-
-	    protected override Expression TransformVariable(Variable variable)
-		{
-			Expression expression;
-			if (_variables.TryGetValue(variable, out expression))
-				return expression;
-			return variable;
-		}
-
-		protected override Expression TransformFunction(FunctionExpression function)
-		{
-			return new FunctionExpression(function.Function, function.Select(Transform).ToArray());
-		}
-	}
+        protected override Expression TransformFunction(FunctionExpression function) => new FunctionExpression(function.Function, function.Select(Transform).ToArray());
+    }
 }

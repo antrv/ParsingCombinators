@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AR.Math.Expressions
 {
-	[Serializable]
+    [Serializable]
 	public sealed class Variable: Expression
 	{
 		private readonly string _id;
@@ -13,36 +13,13 @@ namespace AR.Math.Expressions
 		private readonly IReadOnlyList<Expression> _indexes;
 
 		public Variable(string name)
+            : this(name, (IReadOnlyList<Expression>)null)
 		{
-			if (name == null)
-				throw new ArgumentNullException(nameof(name));
-			if (name.Length == 0)
-				throw new ArgumentException("Name should not be empty", nameof(name));
-			_name = name;
-			_id = name;
-			_indexes = ReadOnlyList<Expression>.Empty;
-		}
+        }
 
-		public Variable(string name, params Expression[] indexes)
+        public Variable(string name, params Expression[] indexes)
+            : this(name, new ReadOnlyList<Expression>(indexes ?? ArrayHelper<Expression>.Empty))
 		{
-			if (name == null)
-				throw new ArgumentNullException(nameof(name));
-			if (name.Length == 0)
-				throw new ArgumentException("Name should not be empty", nameof(name));
-			_name = name;
-
-			if (indexes == null || indexes.Length == 0)
-			{
-				_id = name;
-				_indexes = ReadOnlyList<Expression>.Empty;
-			}
-			else
-			{
-				if (indexes.Any(x => x == null))
-					throw new ArgumentException("Index expression cannot be null.", nameof(indexes));
-				_indexes = new ReadOnlyList<Expression>(indexes);
-				_id = GenerateId();
-			}
 		}
 
 		public Variable(string name, IReadOnlyList<Expression> indexes)

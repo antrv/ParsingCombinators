@@ -20,8 +20,9 @@ namespace Sample
 
             ExpressionParserBuilder parserBuilder = new ExpressionParserBuilder(storage);
             Parser<char, Expression> parser = parserBuilder.Parser.Eof();
+            StringInput parserInput = expression;
 
-            IParsingResult<char, Expression> result = parser(new StringInput(expression));
+            IParsingResult<char, Expression> result = parser(parserInput);
             if (result.Success)
             {
                 Expression expr = result.Value;
@@ -33,18 +34,16 @@ namespace Sample
 
                 Console.WriteLine("Perform substitution");
 
-                var variables = new ReadOnlyList<Variable>(a, b);
-                var values = new ReadOnlyList<Expression>(
-                    new Rational(252, 10), // Rational is used because double represents 25.2 not accerately
-                    new Rational(111, 10) // Rational is used because double is not accurately represents 11.1
-                    );
+                var variableValuePairs = new ReadOnlyList<VariableValuePair>(
+                    new VariableValuePair(a, new Rational(252, 10)), // Rational is used because double represents 25.2 not accerately
+                    new VariableValuePair(b, new Rational(111, 10))); 
 
-                for (int i = 0; i < variables.Count; i++)
+                foreach (var pair in variableValuePairs)
                 {
-                    Console.WriteLine(variables[i].Name + " = " + values[i]);
+                    Console.WriteLine(pair.Variable.Name + " = " + pair.Value);
                 }
 
-                SubstituteTransformation substituteTransformation = new SubstituteTransformation(variables, values);
+                SubstituteTransformation substituteTransformation = new SubstituteTransformation(variableValuePairs);
                 expr = substituteTransformation.Transform(expr);
                 Console.WriteLine(expr);
 

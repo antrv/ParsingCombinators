@@ -85,16 +85,8 @@ namespace AR.Math.Expressions
 			stringBuilder.Append(")");
 		}
 
-		public IEnumerator<Expression> GetEnumerator()
-		{
-			return _arguments.GetEnumerator();
-		}
-
-		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return _arguments.GetEnumerator();
-		}
-
-		public int Count => _arguments.Count;
+        public IEnumerator<Expression> GetEnumerator() => _arguments.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => _arguments.GetEnumerator();
+        public int Count => _arguments.Count;
 	}
 }

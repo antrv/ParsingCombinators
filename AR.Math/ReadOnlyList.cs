@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AR.Math
 {
@@ -9,9 +10,19 @@ namespace AR.Math
 
         private readonly T[] _items;
 
+        public ReadOnlyList()
+        {
+            _items = ArrayHelper<T>.Empty;
+        }
+
         public ReadOnlyList(params T[] items)
         {
             _items = items ?? ArrayHelper<T>.Empty;
+        }
+
+        public ReadOnlyList(IEnumerable<T> items)
+        {
+            _items = items?.ToArray() ?? ArrayHelper<T>.Empty;
         }
 
         public IEnumerator<T> GetEnumerator() => ((IEnumerable<T>)_items).GetEnumerator();
